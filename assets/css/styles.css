@@ -1,0 +1,83 @@
+body{
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    color: #777777;
+    /*background-color: #e6e6e6;*/
+    background-image: url("../images/concrete_seamless.png");
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    /*color: #4aaaa5;*/
+    color: #00ffcc;
+    font-weight: bold;
+}
+
+#mainHeader, #header{
+    padding: 10px 0px;
+    background-color: white;
+    /*border-radius: 5px;*/
+    /*position: relative;*/
+}
+
+#mainHeader{
+    background-color: #666;
+    margin: 0;
+}
+
+#main  p, #main h3{
+    padding: 5px;
+}
+
+#main  h3{
+    padding-bottom: 0px;
+    border-bottom: 2px solid #cccccc;
+}
+
+#main p{
+    line-height: 1.8em;
+    margin: 0 0 0px 0;
+    position: relative;
+}
+
+#main ul li{
+    margin-top: 5px;
+}
+
+#submitBtn{
+    /*width: 100%;*/
+    margin-top: 5px;
+}
+
+.dataEntry{
+    display: inline-block;
+    width: 100%;
+}
+
+#formCol h4, #scheduleCol h4{
+    background-color: #00ffcc;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+
+#formCol, #scheduleCol{
+    border: 2px solid teal;   
+    margin: 0 0 10px 0;
+    padding: 0px;    
+}
+#footer{
+    background-color: #666666;
+    border-top: 10px solid teal;
+    margin: 20px 0 0 0;
+    padding: 10px 0;
+    /*width: 100%;*/
+}
+
+.panel-primary .panel-heading, th, td{
+    background-color: #666666;
+    color: #00ffcc;
+
+}
+
+#scheduleCol.panel-primary .panel-body{
+    padding: 0;
+}

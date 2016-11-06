@@ -2,11 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>DGB's Gif Emporium</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>	
+	<title>DGB's Train Scheduler</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -19,54 +15,79 @@
 </head>
 <body>
 
-	<div class="container text-center"> 
-		<h2 id = "mainHeader">David G. Bethelmy - Gif Emporium</h2>
-	</div>
-
 	<main class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2 id = "mainHeader">Gravy Train Scheduler</h2>
+			</div>
+		</div>
 		<section class="row">
 			<div class = "col-md-12">
 				<div id= "header" class="text-center" >
-					<h4 class="text-center">View Gifs of Dog Breeds</h4>
+					<h4 class="text-center">Train carousel goes here</h4>
 				</div>
 			</div>
 		</section>
 		<section class="row">
 			<div class = "col-md-12">
-				<div id="buttonCol">
-				<h4 class="text-center">Buttons</h4>
-					<div id= "buttonArea">
+				<div id="scheduleCol" class="panel panel-primary">
+					<div class="panel-heading">Current Train Schedule</div>
+					<div class="panel-body">
+						<table id= "scheduleTable" class = "table">
+							<thead>
+								<tr><th>Train Name</th><th>Destination</th><th>Frequency (min)</th><th>Next Arrival</th><th>Minutes Away</th></tr>
+							</thead>
+							<tbody id="rowSpace">
+								
+
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</section>
 		<section class="row">
-			<div class = "col-md-9">
-				<div id = "imageCol" >
-					<h4 class="text-center">Images</h4>
-					<div id="imageArea" class="clearfix"></div>
-				</div>
-			</div>
-			<div class = "col-md-3">
-				<div id = "formCol">
-					<h4>Type in the name of a dog breed to add a search button.</h4>
-					<div id="form">
-						<input type="text" id="dataEntry" name="dataEntry" autofocus>
-						<button id = "submitBtn" class="btn btn-success">Submit</button>
+			<div class = "col-md-12">
+				<div id = "formCol" class = "panel panel-primary">
+					<div class="panel-heading">Add Train</div>
+					<div class="panel-body">
+						<form id="form" action="#">
+							<p>
+								<label for="trainName">Train name</label><br>
+								<input type="text" id="trainName" name="trainName"  class="dataEntry" autofocus>
+							</p>
+							<p>
+								<label for="destination">Destination</label><br>
+								<input type="text" id="destination" name="destination" class="dataEntry" >
+							</p>
+							<p>
+								<label for="firstTime">Time of first train for the day (Military time - HH:mm)</label><br>
+								<input type="time" id="firstTime" name="firstTime" class="dataEntry" >
+							</p>
+							<p>
+								<label for="frequency">Frequency (min)</label><br>
+								<input type="number" id="frequency" name="frequency" class="dataEntry" >
+							</p>
+							<button id = "submitBtn" class="btn btn-success">Submit</button>
+						</form>
 					</div>
 				</div>
 			</div>
 		</section>
 
-	</main>
-
-	<footer class = "container-fluid">
-		<div class="row">
+		<div id = "footer" class = "row">
 			<div class="col-md-12 text-center">
-				<h6>&copy;Copyright 2016 David Bethelmy</h6>
+				<h6>&copy;Copyright 2016 David Bethelmy - Have Brain, Will Travel</h6>
 			</div>
 		</div>
-	</footer>
-	<script src='assets/javascript/app.js'></script>
+	</main>
+
+
+	<script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>	
+	<!-- <script src='assets/javascript/scheduler.js'></script> -->
 </body>
 </html>
