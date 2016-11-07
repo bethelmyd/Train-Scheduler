@@ -109,7 +109,7 @@
         row += "</tr>";
 
         $('#rowSpace').append(row);
-$("#rowSpace button").on("click", function(){
+        $("#rowSpace button").on("click", function(){
             var id = $(this).attr("id");
             dataRef.ref(id).set(null);
         });
