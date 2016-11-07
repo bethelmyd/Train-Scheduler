@@ -7,8 +7,8 @@
         databaseURL: "https://train-scheduler-c1f14.firebaseio.com",
         storageBucket: "",
         messagingSenderId: "960995332424"
-      };
-      firebase.initializeApp(config);
+    };
+    firebase.initializeApp(config);
 
     var dataRef = firebase.database();
 
@@ -26,13 +26,13 @@
 
         // YOUR TASK!!!
         // Code in the logic for storing and retrieving the most recent train info.
-        // Dont forget to provide initial data to your Firebase database.
         var trainName = $('#trainName').val().trim();
         var destination = $('#destination').val().trim();
         var firstTime = $('#firstTime').val().trim();
-        //firstTime = moment(firstTime).format("HH:mm");
-        // if(firstTime > moment())
+        
+        // if(moment(firstTime, "HH:mm").isAfter(moment()))
         // {
+        //     $("#timeModal").modal();
         //     return;
         // }
         var frequency = parseInt($('#frequency').val().trim());
@@ -55,41 +55,52 @@
 
         if(childSnapshot == null) return;
 
+        console.log(childSnapshot);
         // Log everything that's coming out of snapshot
         console.log(childSnapshot.val().trainName);
         console.log(childSnapshot.val().destination);
-        console.log(moment(childSnapshot.val().firstTime).minutes());
+        console.log(moment(childSnapshot.val().firstTime, "HH:mm").minutes());
         console.log(childSnapshot.val().frequency);
         console.log(childSnapshot.val().dateAdded);
 
         //calculate next arrival time and minutes away
         // First Time (pushed back 1 year to make sure it comes before current time)
-        var firstTimeConverted = moment(childSnapshot.val().firstTime,"HH:mm"); //.subtract(1, "years");
+        //Don't need this because I checked to make sure start time of day is less than or equal to current time
+        var firstTimeConverted = moment(childSnapshot.val().firstTime,"HH:mm");//.subtract(1, "years");
         console.log(firstTimeConverted);
 
         // Current Time
         var currentTime = moment();
-        console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
+        console.log("CURRENT TIME: " + currentTime.format("HH:mm"));
 
         // Difference between the times
-        var diffTime = currentTime.diff(moment(firstTimeConverted), "minutes");
+        var diffTime = currentTime.diff(firstTimeConverted, "minutes");
         console.log("DIFFERENCE IN TIME: " + diffTime);
 
-        // Time apart (remainder)
-        var tRemainder = diffTime % childSnapshot.val().frequency;
-        console.log(tRemainder);
+        var tMinutesTillTrain;
+        if(diffTime > 0)
+        {
+            // Time apart (remainder)
+            var tRemainder = diffTime % childSnapshot.val().frequency;
+            console.log(tRemainder);
 
-        // Minute Until Train
-        var tMinutesTillTrain = childSnapshot.val().frequency - tRemainder;
+            // Minute Until Train
+            tMinutesTillTrain = childSnapshot.val().frequency - tRemainder;
+        }
+        else
+        {
+            tMinutesTillTrain = diffTime * -1;
+        }
+
         console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
         // Next Train
-        var nextTrain = moment().add(tMinutesTillTrain, "minutes")
-        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm A"))
+        var nextTrain = currentTime.add(tMinutesTillTrain, "minutes");
+        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm A"));
 
         // make row
-
         var row = "<tr>";
+        row += "<td><button class = 'btn btn-danger' id = '" + childSnapshot.key + "'>X</button></td>";
         row += "<td>" + childSnapshot.val().trainName + "</td> ";
         row += "<td>" + childSnapshot.val().destination + "</td> ";
         row += "<td>" + childSnapshot.val().frequency + "</td> ";
@@ -98,12 +109,15 @@
         row += "</tr>";
 
         $('#rowSpace').append(row);
-
-
+$("#rowSpace button").on("click", function(){
+            var id = $(this).attr("id");
+            dataRef.ref(id).set(null);
+        });
 // Handle the errors
-    }, function (errorObject) {
+}, function (errorObject) {
         //console.log("Errors handled: " + errorObject.code)
     });
+
 
     // dataRef.ref().orderByChild("dateAdded").limitToLast(1)
     //         .on("child_added", function (snapshot) {
@@ -114,3 +128,6 @@
     //     $("#commentdisplay").html(snapshot.val().comment);
     // });
 
+    // dataRef.ref().on("child_removed", function(){
+    //     dataRef.ref().update();
+    // });

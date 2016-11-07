@@ -35,11 +35,9 @@
 					<div class="panel-body">
 						<table id= "scheduleTable" class = "table">
 							<thead>
-								<tr><th>Train Name</th><th>Destination</th><th>Frequency (min)</th><th>Next Arrival</th><th>Minutes Away</th></tr>
+								<tr><th>Remove</th><th>Train Name</th><th>Destination</th><th>Frequency (min)</th><th>Next Arrival</th><th>Minutes Away</th></tr>
 							</thead>
 							<tbody id="rowSpace">
-								
-
 							</tbody>
 						</table>
 					</div>
@@ -53,15 +51,15 @@
 					<div class="panel-body">
 						<form id="form" action="#">
 							<p>
-								<label for="trainName">Train name</label><br>
+								<label for="trainName">Train name:</label><br>
 								<input type="text" id="trainName" name="trainName"  class="dataEntry" autofocus>
 							</p>
 							<p>
-								<label for="destination">Destination</label><br>
+								<label for="destination">Destination:</label><br>
 								<input type="text" id="destination" name="destination" class="dataEntry" >
 							</p>
 							<p>
-								<label for="firstTime">Time of first train for the day (Military time - HH:mm)</label><br>
+								<label for="firstTime">Time (Military time - HH:mm) of first train for the day prior to current time:</label><br>
 								<input type="time" id="firstTime" name="firstTime" class="dataEntry" >
 							</p>
 							<p>
@@ -72,7 +70,27 @@
 						</form>
 					</div>
 				</div>
-			</div>
+				<!-- Modal -->
+<!-- 				<div class="modal fade" id="timeModal" role="dialog">
+					<div class="modal-dialog">
+ -->
+						<!-- Modal content-->
+<!-- 						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Error with Start Time</h4>
+							</div>
+							<div class="modal-body">
+							<p>Please enter a time that is earlier than or equal to the current time.</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+ -->			</div>
 		</section>
 
 		<div id = "footer" class = "row">
