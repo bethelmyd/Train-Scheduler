@@ -99,8 +99,8 @@
         console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm A"));
 
         // make row
-        var row = "<tr>";
-        row += "<td><button class = 'btn btn-danger' id = '" + childSnapshot.key + "'>X</button></td>";
+        var row = "<tr id = '" + childSnapshot.key + "'>";
+        row += "<td><button class = 'btn btn-danger'>X</button></td>";
         row += "<td>" + childSnapshot.val().trainName + "</td> ";
         row += "<td>" + childSnapshot.val().destination + "</td> ";
         row += "<td>" + childSnapshot.val().frequency + "</td> ";
@@ -109,9 +109,9 @@
         row += "</tr>";
 
         $('#rowSpace').append(row);
-        $("#rowSpace button").on("click", function(){
+        $("#" + childSnapshot.key).on("click", function(){
             var id = $(this).attr("id");
-            dataRef.ref(id).set(null);
+            dataRef.ref(id).remove();
         });
 // Handle the errors
 }, function (errorObject) {
@@ -128,6 +128,8 @@
     //     $("#commentdisplay").html(snapshot.val().comment);
     // });
 
-    dataRef.ref().on("child_removed", function(childSnapshot){
-        dataRef.ref().update();
+    dataRef.ref().on("child_removed", function(deletedSnapshot){
+        var id = deletedSnapshot.key;
+        console.log(id);
+        $("#"+id).remove();
     });
