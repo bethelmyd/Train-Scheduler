@@ -46,6 +46,12 @@
             frequency: frequency,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
+
+        $('#trainName').val("");
+        $('#destination').val("");
+        $('#firstTime').val("");
+        $('#frequency').val("");
+        
         // Don't refresh the page!
         return false;
     });
