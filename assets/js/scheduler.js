@@ -128,6 +128,6 @@
     //     $("#commentdisplay").html(snapshot.val().comment);
     // });
 
-    // dataRef.ref().on("child_removed", function(){
-    //     dataRef.ref().update();
-    // });
+    dataRef.ref().on("child_removed", function(childSnapshot){
+        dataRef.ref().update();
+    });
